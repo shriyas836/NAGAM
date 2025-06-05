@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints Management</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #fffaf0;
+            color: #333;
+        }
+
+        h2{
+            margin: 0%;
+            background-color: #523A28;
+            color: white;
+            padding: 10px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .solved-tab, .back-tab {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background-color: #db6262;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .back-tab {
+            display: none;
+            right: 150px;
+            background-color: #db6262;
+        }
+        .filter-buttons {
+            margin: 20px 0;
+        }
+        .filter-buttons button {
+            margin: 5px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            background-color: #f7f8fa;
+            color: rgb(8, 8, 8);
+        }
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: white;
+            color: black;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #7B583d;
+            color: white;
+        }
+        tr:hover {
+            background-color: #ecf0f1;
+            cursor: pointer;
+        }
+        .details-row {
+            display: none;
+            background-color: #f0f0f0;
+        }
+        .details-cell {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+            white-space: pre-line;
+        }
+    </style>
+
+    
+</head>
+<body>
+    <h2>Complaint Management</h2>
+    
+    <!-- <div class="filter-buttons"> -->
+        
+        <!-- <button onclick="filterCategory('Sewage')">Sewage</button>
+        <button onclick="filterCategory('Garbage')">Garbage</button>
+        <button onclick="filterCategory('Stray Animals')">Stray Animals</button>
+        <button onclick="filterCategory('Street Lights')">Street Lights</button> -->
+        <!-- <div class="filter-buttons">
+            <label for="categoryFilter">Filter by Category:</label>
+            <select id="categoryFilter">
+                <option value="">All</option>
+                <option value="garbage">Garbage</option>
+                <option value="sewage">Sewage</option>
+                <option value="street light">Street Light</option>
+                <option value="stray animals">Stray Animals</option>
+            </select>
+            <button onclick="filterComplaints()">Filter</button>
+        </div>
+         -->
+   
+    <!-- Complaint Table -->
+    
+    <!-- <button class="solved-tab" onclick="toggleSolvedSection()">Solved Complaints</button> -->
+    <button class="back-tab" onclick="toggleSolvedSection()">Back to Pending</button>
+    
+    <div id="complaints-section">
+        <!-- <h3>Pending Complaints And Resolved Complaints</h3> -->
+        <table id="complaintsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>category_name</th>
+                    <th>Description</th>
+                    <th>Zone</th>
+                    <th>Ward</th>
+                    <th>Contact Name</th>
+                    <th>Mobile Number</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Resolve</th>
+                </tr>
+            </thead>
+            <tbody id="complaintsTableBody"></tbody>
+        </table>
+    </div>
+    
+    <div id="solvedsection" style="display: none;">
+        <h3>Solved Complaints</h3>
+        <table id="solvedComplaintsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Zone</th>
+                    <th>Ward</th>
+                    <th>Contact Name</th>
+                    <th>Mobile Number</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                    <th>Resolved At</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    
+    <script src="complaint.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const userToken = localStorage.getItem("token");       // For users
+            const adminToken = localStorage.getItem("adminToken"); // For admins
+    
+            if (!userToken && !adminToken) {
+                alert("🚫 Please log in first to access this page!");
+                window.location.href = "/home.html"; // Redirect to user login page
+            }
+        });
+    </script>
+   
+    
+   
+
+</body>
+</html>
+

@@ -1,0 +1,135 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback Page</title>
+  <link rel="stylesheet" href="feed.css">
+  <style>
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 20px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      width: 50%;
+      max-width: 400px;
+      height: auto;
+      text-align: center;
+    }
+    .popup-content {
+      text-align: center;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .stars {
+      cursor: pointer;
+    }
+    .star {
+      font-size: 24px;
+      color: gray;
+    }
+    .star.selected {
+      color: gold;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Feedback Pop-up Form -->
+<div id="feedbackPopup" class="popup">
+  <div class="popup-content">
+    <!-- Hidden inputs for Complaint ID & Client ID -->
+    <input type="hidden" id="complaint_id" value="4"> <!-- Change dynamically -->
+    <input type="hidden" id="client_id" value="4"> <!-- Change dynamically -->
+
+    <span id="closeBtn" class="close">&times;</span>
+    <h2>Feedback</h2>
+    
+    <!-- Rating System -->
+    <div id="rating">
+      <label for="rating">Rate Us: </label>
+      <div class="stars">
+        <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+      </div>
+      <input type="hidden" id="ratingValue" value="0">
+    </div>
+
+    <!-- Comment Section -->
+    <div>
+      <label for="comment">Your Comment:</label>
+      <textarea id="comment" rows="4" cols="50" placeholder="Write your feedback here..."></textarea>
+    </div>
+
+    <div>
+      <button id="submitFeedbackBtn">Submit Feedback</button>
+    </div>
+  </div>
+</div>
+
+<!-- Thank You Pop-up -->
+<div id="thankYouPopup" class="popup">
+  <div class="popup-content">
+    <h2>Thank You!</h2>
+    <button id="okButton">OK</button>
+  </div>
+</div>
+
+<script>
+  // Show pop-up automatically on page load
+  window.onload = function() {
+    document.getElementById("feedbackPopup").style.display = "block";
+  };
+  
+  // Close pop-up when clicking the close button
+  document.getElementById("closeBtn").onclick = function() {
+    document.getElementById("feedbackPopup").style.display = "none";
+  };
+  
+  // Star rating functionality
+  const stars = document.querySelectorAll(".star");
+  const ratingValue = document.getElementById("ratingValue");
+  
+  stars.forEach(star => {
+    star.addEventListener("click", function() {
+      let value = this.getAttribute("data-value");
+      ratingValue.value = value;
+      
+      // Highlight selected stars
+      stars.forEach(s => {
+        s.classList.remove("selected");
+      });
+      
+      for (let i = 0; i < value; i++) {
+        stars[i].classList.add("selected");
+      }
+    });
+  });
+  
+  // Submit feedback and show Thank You pop-up
+  document.getElementById("submitFeedbackBtn").onclick = function() {
+    document.getElementById("feedbackPopup").style.display = "none";
+    document.getElementById("thankYouPopup").style.display = "block";
+  };
+
+  // Redirect to home page when clicking OK button
+  document.getElementById("okButton").onclick = function() {
+    window.location.href = "../home.html";
+  };
+</script>
+<script src="feed.js"></script>
+</body>
+</html>

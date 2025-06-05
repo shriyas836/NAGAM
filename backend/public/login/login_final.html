@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Signup</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: floralwhite;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            text-align: center;
+            width: 350px;
+        }
+        h2 {
+            color: #523A28;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background: #8e7161;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #7B583d;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+        .required::after {
+            content: "*";
+            color: red;
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .error {
+            border: 2px solid red;
+        }
+        .toggle-container {
+            margin-top: 15px;
+        }
+        .toggle-container a {
+            color: #523A28;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+   
+    <div class="container" id="loginForm">
+        <h2>Login</h2>
+        <form id="loginFormElement">
+            <label class="required" for="userType">Select User Type:</label>
+            <select id="userType">
+                <option value="">-- Select an option --</option>
+                <option value="civilian">Civilian</option>
+                <option value="admin">Admin</option>
+            </select>
+
+            <label class="required" for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" placeholder="Enter your email" required>
+
+            <label class="required" for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                
+            <!-- Forgot Password Link (Added Below Password Field) -->
+        <div class="toggle-container">
+            <p><a href="#" onclick="showForgotPasswordForm()">Forgot Password?</a></p>
+        </div>
+
+
+            <button type="submit">Login</button>
+        </form>
+
+        <div class="toggle-container">
+            <p>Don't have an account? <a href="#" onclick="toggleForms()">Sign Up</a></p>
+        </div>
+      
+
+     </div>
+     <!-- FORGOT PASSWORD FORM (Hidden Initially) -->
+<div class="container" id="forgotPasswordForm" style="display: none;">
+    <h2>Reset Password</h2>
+    <form id="forgotPasswordElement">
+        <label class="required" for="forgotEmail">Enter Your Email</label>
+        <input type="email" id="forgotEmail" placeholder="Enter your registered email" required>
+
+        <button type="submit">Send OTP</button>
+    </form>
+    <div class="toggle-container">
+        <p><a href="#" onclick="toggleForms()">Back to Login</a></p>
+    </div>
+</div>
+
+    
+    <div class="container" id="signupForm" style="display: none;">
+        <h2>Sign Up</h2>
+        <form id="signupFormElement">
+            <label class="required" for="firstName">First Name</label>
+            <input type="text" id="firstName" placeholder="Enter your first name" required>
+
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" placeholder="Enter your last name">
+
+            <label class="required" for="signUpEmail">Email</label>
+            <input type="email" id="signUpEmail" placeholder="Enter your email" required>
+
+            <label class="required" for="signUpPassword">Password</label>
+            <input type="password" id="signUpPassword" placeholder="Enter your password" required>
+
+            <label class="required" for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" placeholder="Re-enter your password" required>
+            
+
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <div class="toggle-container">
+            <p>Already have an account? <a href="#" onclick="toggleForms()">Login</a></p>
+        </div>
+    </div>
+    <script>
+           // Toggle between Login & Signup forms
+function toggleForms() {
+    let loginForm = document.getElementById('loginForm');
+    let signupForm = document.getElementById('signupForm');
+    loginForm.style.display = loginForm.style.display === "none" ? "block" : "none";
+    signupForm.style.display = signupForm.style.display === "none" ? "block" : "none";
+}
+
+// 🚀 SIGNUP FORM SUBMISSION
+// document.getElementById('signupFormElement').addEventListener('submit', async function(event) {
+//     event.preventDefault();
+
+//     // Get user inputs
+//     let firstName = document.getElementById('firstName').value;
+//     let lastName = document.getElementById('lastName').value;
+//     let email = document.getElementById('signUpEmail').value;
+//     let password = document.getElementById('signUpPassword').value;
+//     let confirmPassword = document.getElementById('confirmPassword').value;
+
+//     // Basic Validation
+//     if (!firstName || !email || !password || !confirmPassword) {
+//         alert('Please fill in all required fields.');
+//         return;
+//     }
+
+//     if (password !== confirmPassword) {
+//         alert('Passwords do not match!');
+//         return;
+//     }
+
+//     try {
+//         // API Call to Register User
+//         const response = await fetch("http://localhost:8000/user/register", {
+//             method: "POST",
+//             headers: { "Content-Type": "application/json" },
+//             body: JSON.stringify({ 
+//                 first_name: firstName,
+//                 last_name: lastName,
+//                 email: email,
+//                 password: password 
+//             })
+//         });
+
+//         const data = await response.json();
+
+//         if (response.ok) {
+//             alert("Signup successful! Please log in.");
+//             toggleForms(); // Switch to login form
+//         } else {
+//             alert(data.error);
+//         }
+//     } catch (error) {
+//         alert("Error during signup. Please try again.");
+//     }
+// }); 
+// 🚀 SIGNUP FORM SUBMISSION
+document.getElementById('signupFormElement').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    // Get user inputs
+    let firstName = document.getElementById('firstName').value.trim();
+    let lastName = document.getElementById('lastName').value.trim();
+    let email = document.getElementById('signUpEmail').value.trim();
+    let password = document.getElementById('signUpPassword').value;
+    let confirmPassword = document.getElementById('confirmPassword').value;
+
+    // Validation Patterns
+    const namePattern = /^[A-Za-z]{2,}$/; // Only letters, min 2 characters
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const passwordPattern = /^(?=.*[a-zA-Z0-9]).{2,}$/;
+
+
+
+    // 🔹 First & Last Name Validation
+    if (!namePattern.test(firstName)) {
+        alert("First name must contain only letters and be at least 2 characters long.");
+        return;
+    }
+    if (!namePattern.test(lastName)) {
+        alert("Last name must contain only letters and be at least 2 characters long.");
+        return;
+    }
+
+    // 🔹 Email Validation
+    if (!emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
+
+    // 🔹 Password Validation
+    if (!passwordPattern.test(password)) {
+        alert("Password must be at least 2 characters long.");
+        return;
+    }
+
+    // 🔹 Confirm Password Validation
+    if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+    }
+
+    try {
+        // API Call to Register User
+        const response = await fetch("http://localhost:8000/user/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ 
+                first_name: firstName,
+                last_name: lastName,
+                email: email,
+                password: password 
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert("Signup successful! Please log in.");
+            toggleForms(); // Switch to login form
+        } else {
+            alert(data.error);
+        }
+    } catch (error) {
+        alert("Error during signup. Please try again.");
+    }
+});
+
+
+// 🚀 LOGIN FORM SUBMISSION
+document.getElementById('loginFormElement').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    // Get login inputs
+    const userType = document.getElementById('userType').value;
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+
+    if (!userType) {
+        alert('Please select a user type.');
+        return;
+    }
+
+    // ✅ Ensure correct API is called based on user type
+    let loginURL;
+    if (userType === "admin") {
+        if (!email.endsWith("@nagam.in")) {
+            alert("Invalid admin email! Admin emails must end with @nagam.in");
+            return;
+        }
+        loginURL = "http://localhost:8000/admin/login";  // ✅ Admin API
+    } else {
+        loginURL = "http://localhost:8000/user/login";  // ✅ Civilian API
+    }
+
+    try {
+        const response = await fetch(loginURL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert(`${userType.charAt(0).toUpperCase() + userType.slice(1)} login successful!`);
+
+
+            // ✅ Store token & user details in local storage
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("userId", data.userId);
+            localStorage.setItem("userType", userType);
+            localStorage.setItem("firstName", data.firstName); 
+
+            // ✅ Redirect users accordingly
+            if (userType === "admin") {
+                window.location.href = "/admin.html"; // ✅ Admin Redirect
+            } else {
+                window.location.href = "/home.html";  // ✅ Civilian Redirect
+            }
+        } else {
+            alert("Invalid credentials! Please try again.");
+        }
+    } catch (error) {
+        alert("Error logging in. Please try again.");
+    }
+});
+
+
+ </script>
+ <script>
+ // Show the Forgot Password form
+ function showForgotPasswordForm() {
+     document.getElementById('loginForm').style.display = 'none';
+     document.getElementById('signupForm').style.display = 'none';
+     document.getElementById('forgotPasswordForm').style.display = 'block';
+ }
+ 
+ // 🚀 Forgot Password Form Submission
+ document.getElementById('forgotPasswordElement').addEventListener('submit', async function(event) {
+     event.preventDefault();
+ 
+     let email = document.getElementById('forgotEmail').value.trim();
+ 
+     if (!email) {
+         alert("Please enter your email.");
+         return;
+     }
+ 
+     try {
+         const response = await fetch("http://localhost:8000/user/forgot-password", {
+             method: "POST",
+             headers: { "Content-Type": "application/json" },
+             body: JSON.stringify({ email })
+         });
+ 
+         const data = await response.json();
+ 
+         if (response.ok) {
+             alert("OTP sent to your email. Check your inbox.");
+             localStorage.setItem("resetEmail", email);
+             window.location.href = "/login/reset-pass.html"; // Redirect to Reset Password Page
+         } else {
+             alert(data.error || "Failed to send OTP. Try again.");
+         }
+     } catch (error) {
+         alert("Error sending OTP. Please try again.");
+     }
+ });
+ </script>
+
+
+ </body>
+</html> 
+

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sewage Management - Nagar Nigam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #fffaf0;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            background: white;
+            padding: 40px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: left;
+            opacity: 0;
+            transform: scale(0.9);
+            animation: fadeIn 1s forwards;
+        }
+
+        .container h1{
+            margin: 0%;
+            background-color: #523A28;
+            color: white;
+            padding: 10px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .image-gallery {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .image-gallery img {
+            width: 45%;
+            height: auto;
+            border-radius: 5px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .image-gallery img:hover {
+            transform: scale(1.1);
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .details {
+            text-align: left;
+            margin-top: 20px;
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            transition: opacity 0.5s ease-in-out, height 0.5s ease-in-out;
+        }
+
+        .details.visible {
+            opacity: 1;
+            height: auto;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        button {
+            background-color: #8e7161;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #7B583d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sewage Management - NAGAM</h1>
+        <div class="image-gallery">
+            <img src="images/sewage1.avif" width="300" height="100" alt="Sewage Management 1">
+            
+        </div>
+        <p>Nagam is responsible for maintaining and operating the sewage systems, ensuring proper waste water disposal, and preventing water contamination.</p>
+        <p id="shortDesc">The department is focused on effective sewage management through regular maintenance of sewage lines, treatment plants, and handling emergency blockages...</p>
+        <div id="details" class="details">
+            <p>The Sewage Management department ensures that sewage lines are regularly cleaned, maintained, and repaired to prevent blockages and ensure smooth flow of wastewater throughout the city.</p>
+            <p>In addition to maintaining the sewage lines, Nagam also operates sewage treatment plants that treat wastewater before being released back into the environment, ensuring that it meets environmental safety standards.</p>
+            <p>The department works on handling emergency blockages and leakages that occur in the sewage system, minimizing the risk of contamination and maintaining sanitation in the city.</p>
+            <p>Furthermore, Nagam promotes awareness programs for citizens, encouraging them to dispose of waste responsibly and avoid practices that lead to clogging the sewage systems.</p>
+        </div>
+        <div class="button-container">
+            <button id="readMoreBtn" onclick="toggleDetails()">Read More</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleDetails() {
+            const details = document.getElementById('details');
+            const shortDesc = document.getElementById('shortDesc');
+            const button = document.getElementById('readMoreBtn');
+
+            if (details.classList.contains('visible')) {
+                details.classList.remove('visible');
+                setTimeout(() => details.classList.add('hidden'), 500);
+                shortDesc.classList.remove('hidden');
+                button.innerText = "Read More";
+            } else {
+                details.classList.remove('hidden');
+                setTimeout(() => details.classList.add('visible'), 10);
+                shortDesc.classList.add('hidden');
+                button.innerText = "Read Less";
+            }
+        }
+    </script>
+</body>
+</html>

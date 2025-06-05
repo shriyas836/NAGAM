@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint and Grievance Form</title>
+    <link rel="stylesheet" href="comp.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const token = localStorage.getItem("token");
+    const userType = localStorage.getItem("userType");
+
+    if (!token || userType !== "civilian") {
+        alert("🚫 Unauthorized Access! Please log in first.");
+        localStorage.setItem("redirectToComplaint", "true");  // 📝 Save Intent
+        window.location.href = "../login_final.html"; // 🔁 Redirect to login page
+    }
+    });
+
+        </script>
+        
+        
+</head>
+<body>
+    <div class="container">
+        <h1>Complaint and Grievance Details</h1>
+        <form id="complaintForm">
+            <label for="category">Category</label>
+            <select id="category" required>
+                <option value="">Select a category</option>
+                <option value="Sewage">Sewage</option>
+                <option value="Garbage">Garbage</option>
+                <option value="Stray Animals">Stray Animals</option>
+                <option value="Streetlight">Streetlight</option>
+            </select>
+
+            <label for="complaintSubject">Complaint Subject</label>
+            <input type="text" id="complaintSubject" placeholder="Enter complaint subject" required>
+
+            <label for="issueDescription">Issue Description</label>
+            <textarea id="issueDescription" rows="4" placeholder="Describe the issue" required></textarea>
+
+            <label for="zone">Zone</label>
+            <select id="zone" required>
+                <option value="">Select a zone</option>
+                <option value="1">Zone 1</option>
+                <option value="2">Zone 2</option>
+                <option value="3">Zone 3</option>
+                <option value="4">Zone 4</option>
+            </select>
+
+            <label for="ward">Ward</label>
+            <select id="ward" required>
+                <option value="">Select a Ward</option>
+                <option value="1">Ward 1</option>
+                <option value="2">Ward 2</option>
+                <option value="3">Ward 3</option>
+                <option value="4">Ward 4</option>
+
+            </select>
+
+
+            <h2>Complaint Details</h2>
+
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" placeholder="Enter your first name" required>
+
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" placeholder="Enter your last name" required>
+
+            <label for="mobileNumber">Mobile Number</label>
+            <input type="tel" id="mobileNumber" placeholder="Enter your mobile number" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+        </form>
+    </div>
+    <script src="comp.js"></script>
+    <script>
+        
+        
+        document.getElementById('complaintForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+        
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("You must be logged in to submit a complaint.");
+                window.location.href = "../login_final.html";  // ✅ Redirect to login
+                return;
+            }
+        
+            const complaintData = {
+                category: document.getElementById('category').value,
+                description: document.getElementById('description').value,
+                location: document.getElementById('location').value,
+            };
+        
+            try {
+                const response = await fetch("http://localhost:8000/user/submit-complaint", {
+                    method: "POST",
+                    headers: { 
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}` // ✅ Send token for authentication
+                    },
+                    body: JSON.stringify(complaintData)
+                });
+        
+                const data = await response.json();
+        
+                if (response.ok) {
+                    alert("Complaint submitted successfully!");
+                    window.location.href = "http://localhost:8000/home.html";  // ✅ Redirect to home page
+                } else {
+                    alert(data.error);
+                }
+            } catch (error) {
+                alert("Error submitting complaint. Please try again.");
+            }
+        });
+       
+
+    
+        </script>
+        
+</body>
+</html>
+
+
+
+

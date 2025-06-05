@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Signup</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: floralwhite;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            text-align: center;
+            width: 350px;
+        }
+        h2 {
+            margin: 0%;
+            background-color: #523A28;
+            color: white;
+            padding: 10px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        button {
+            background: #8e7161;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #7B583d;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" placeholder="Enter your first name" required>
+
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" placeholder="Enter your last name" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+     <script>
+        document.getElementById('signupForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+
+    if (!firstName || !lastName) {
+        alert('Please fill in all fields.');
+        return;
+    }
+
+    try {
+        const response = await fetch("http://localhost:8000/admin/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ first_name: firstName, last_name: lastName }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            alert(`Admin Registered!\nEmail: ${data.email}\nPassword: ${data.password}`);
+            window.location.href = "admin.html";
+        } else {
+            alert(data.error || "Registration failed!");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Something went wrong! Please try again.");
+    }
+});
+
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const userToken = localStorage.getItem("token");       // For users
+            const adminToken = localStorage.getItem("adminToken"); // For admins
+    
+            if (!userToken && !adminToken) {
+                alert("🚫 Please log in first to access this page!");
+                window.location.href = "/home.html"; // Redirect to user login page
+            }
+        });
+    </script>
+
+</body>
+</html>

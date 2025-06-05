@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAGAM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <style>
+        body{
+            margin: 0%;
+            padding: 0%;
+            background-color: #FFFAF0;
+
+        }
+
+        #heading{
+            height: 75px;
+            width: 100%;
+            font-size: 2.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #8E7161;
+
+        }
+
+        #logo{
+            height: 4rem;
+            margin-left: 10px;
+            margin-right: 10px;
+
+        }
+
+        #login{
+            height: 60%;
+            width: 150px;
+            color: white;
+            background-color: #8E7161;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.5rem;
+            border: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            
+        }   
+        
+        a{
+            text-decoration: none;
+        }
+
+        #login svg{
+            display: flex;
+            align-items: center;
+        }
+
+        #login:hover {
+            border: 2px solid white;
+
+        }
+
+        #user{
+            height: 70%;
+            margin-right: 10px;
+            fill: white;
+
+        }
+
+        #dropdownMenu a{
+            background-color: white;
+            width: 140px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            border-radius: 5px;
+            font-size: medium;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #dropdownMenu a:hover{
+            background-color: #ddd;
+        }
+
+        #title{
+            margin: 0;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin-right: 50%;
+            color: white;
+
+        }
+
+        .navbar {
+            width: 100%;
+            height: 2.5rem;
+            background-color: #523A28;
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .button{
+            height: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            width: 60%;
+            
+        }
+
+        .nav {
+            padding: 10px;
+            height: 100%;
+            font-size: 1rem;
+            background-color: #523A28;
+            color: white;
+            border: 0px;
+            cursor: pointer;
+            width: 140px;
+            box-sizing: border-box;
+
+        }
+        .nav:hover {
+            border: 1px solid white;
+            
+        }
+       
+        .drpdwn_cont {
+            display: none;
+            position: absolute;
+            background-color: white;
+            width: 140px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .drpdwn {
+            height: 100%;
+            position: relative;
+            display: inline-block;
+        }
+
+        .drpdwn:hover .drpdwn_cont {
+            display: block;
+        }
+
+        .drpdwn_cont a {
+            color: black;
+            padding: 10px 16px;
+            text-decoration: none;
+            display: block;
+
+        }
+
+        .drpdwn_cont a:hover {
+            background-color: #ddd;
+        }
+        
+        footer {
+            position: relative;
+            background-color: #8E7161;
+            color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30px;
+            width: 100%;
+            bottom: 0%;
+        }
+
+        .slider-container {
+            margin: 10px;
+            overflow: hidden;
+            height: 500px;
+            position: relative;
+        }
+
+        .owl-carousel .item img {
+            width: 100%;
+            
+        }
+
+        .slider-container button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            background: #444;
+            color: white;
+            margin: 5px;
+            border-radius: 100%;
+            z-index: 10;
+        }
+
+        #prev {
+            left: 10px;
+        }
+
+        #next {
+            right: 10px;
+        }
+
+        .slider-container button:hover {
+            background: #222;
+        }
+
+        #line1 {
+            height: 500px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-evenly;
+
+        }
+
+        .population {
+            width: 70%;
+            height: 500px;
+            display: grid;
+            justify-content: space-evenly;
+            align-items: center;
+            
+
+           
+        }
+
+        .top {
+            height: 200px;
+            width: 800px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+            
+        }
+
+        .pop {
+            height: 160px;
+            width: 230px;
+            padding: 10px;
+            margin: 10px;
+            display: grid; 
+            justify-content: center; 
+            align-items: center; 
+            box-shadow: 5px 5px 10px gray; 
+            background-color: white; 
+            border-radius: 10px; 
+        }    
+
+        .icon {
+            height: 90px;
+            display: flex;
+            justify-content: center;
+            fill: #817670;
+           
+        }
+
+        .icon:hover {
+            transform: scale(1.2); 
+            transition: all 0.5s ease-in;
+            
+        }
+
+        .pp {
+            font-size: large;
+            text-align: center;
+        }
+
+        #announcement {
+            height: 450px;
+            padding: 10px;
+            box-shadow: 5px 5px 10px gray;
+            background-color: white;
+
+        }
+
+        #Ann{
+            margin: 0%;
+            background-color: #523A28;
+            color: white;
+            padding: 10px;
+        }
+
+        #announcement_cont {
+            height: 385px;
+            padding: 10px;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+        .announ{
+            border-bottom: 1px solid #ddd;
+        }
+
+        .Ann_title{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .Ann_cont{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        #About{
+            margin: 20px;
+            background: #ffffff;
+            padding: 30px;
+            box-shadow: 5px 5px 10px gray;
+            border-radius: 10px;
+        }
+
+        #Ab_title{
+            margin: 0;
+            background-color: #523A28;
+            color: white;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .Ab_content p {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin: 0;
+        }
+        #line2 {
+            height: 350px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-evenly;
+
+        }
+        #officials{
+
+            gap: 30px;
+            height: 300px;
+            width: 70%;
+            margin: 10px;
+            padding: 10px;
+            display: flex;
+            overflow: auto;
+
+        }
+        .op{
+            background-color: white;
+            height: 280px;
+            width: 300px;
+            justify-content: center;
+            align-items: center;
+            display:grid;
+            gap: 10px; 
+            border: 1px solid azure; 
+            border-radius: 5px;
+            flex-wrap: wrap;
+            box-shadow: 5px 5px 10px ;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        #contact_us{
+            height: 300px;
+            width: 300px;
+            padding: 10px;
+            box-shadow: 5px 5px 10px gray;
+            background-color: white;
+        }
+
+        #contact{
+            margin: 0%;
+            background-color: #523A28;
+            color: white;
+            padding: 10px;
+        }
+
+        #contact_content{
+            font-size: large;
+        }
+
+        #important_links{
+            margin: 20px;
+            background: #ffffff;
+            padding: 30px;
+            box-shadow: 5px 5px 10px gray;
+            border-radius: 10px;
+        }
+
+        #important_links h1{
+            margin: 0;
+            background-color: #523A28;
+            color: white;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+       
+        #link_list{
+            height: 200px;
+            display: flex;
+            justify-content:flex-start;
+            align-items: center;
+            padding: 20px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            gap: 20px;
+            white-space: nowrap;
+        }
+
+        .link{
+            height: 130px;
+            box-shadow: 5px 5px 10px gray;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+    
+
+
+                .user-section {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                }
+
+                .user-btn {
+                    background: none;
+                    border: none;
+                    color: white;
+                    font-size: 16px;
+                    cursor: pointer;
+                    padding: 5px 12px;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+
+                .user-btn svg {
+                    fill: white;
+                }
+
+                .drpdwn_cont {
+                    display: none;
+                    position: absolute;
+                    background-color: white;
+                    width: 140px;
+                    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+                    border-radius: 5px;
+                    overflow: hidden;
+                    z-index: 10;
+                }
+
+                .drpdwn:hover .drpdwn_cont {
+                    display: block;
+                }
+
+                .drpdwn_cont a {
+                    color: black;
+                    padding: 4px 5px;
+                    text-decoration: none;
+                    display: block;
+                }
+
+                .drpdwn_cont a:hover {
+                    background-color: #ddd;
+                }
+
+                /* ❌ Close button */
+                .close-btn {
+                    display: block;
+                    background: none;
+                    border: none;
+                    font-size: 8px;
+                    width: 100%;
+                    text-align: right;
+                    cursor: pointer;
+                }
+
+                .close-btn:hover {
+                    background-color:#ddd;
+                }
+
+        #chatbot{
+                height: 4.5rem;
+                width: 4.5rem;
+                background-color: white;
+                box-shadow: 5px 5px 10px gray;
+                border: none;
+                border-radius: 100%;
+                position: fixed;
+                left: 10px;
+                bottom: 10px;
+                z-index: 999;
+                display: grid;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
+         
+        #chatbot svg{
+            margin-left: 10px;
+            margin-top: 5px;
+        }
+
+        .chat-container {
+            height: 400px;
+            width: 350px;
+            background-color: #fff;
+            box-shadow: 5px 5px 10px gray;
+            border-radius: 10px;
+            position: fixed;
+            left: 20px;
+            bottom: 80px; 
+            display: none; 
+            flex-direction: column;
+            z-index: 999;
+            margin: 10px;
+        }
+
+        #chat:hover .chat-container{
+            display: flex;
+        }
+        
+        .chat-container h2 {
+            margin: 10px;
+            background-color: #523A28;
+            color: white;
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .chat-box {
+            height: 300px;
+            overflow-y: auto;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .chat-message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .bot-message {
+            background-color: #8E7161;
+            color: #fff;
+            text-align: left;
+        }
+        
+        .user-message {
+            background-color: #f1f1f1;
+            text-align: right;
+        }
+        
+        .chat-input {
+            display: flex;
+            padding: 10px;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .chat-input button {
+            padding: 10px 20px;
+            background-color: #8E7161;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        
+        .chat-input button:hover {
+            background-color: #7B583D;
+        }
+        .chat-container {
+            display: none;  /* Hide chatbot initially */
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 300px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+        }
+
+
+
+
+    </style>
+        
+</head>
+<body>
+    <header>
+            
+             
+            <div id="heading">
+                <img src="images/logo copy.png" id="logo" alt="">
+                <p id="title">Nagar Nigam, Tonk</p>
+            
+                <div id="authSection">
+                    <!-- 🔹 Login Button (Shown when NOT logged in) -->
+                    <a href="./login/login_final.html" id="loginSection">
+                        <button id="login">
+                            <svg id="user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24">
+                                <path d="M399 384.2C376.9 345.8 335.4 320 288 320l-64 0c-47.4 0-88.9 25.8-111 64.2
+                                         c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256
+                                         256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"/>
+                            </svg>
+                            Login
+                        </button>
+                    </a>
+                    <div id="userSection" class="user-section" style="display: none;">
+                        <div class="drpdwn">
+                            <button class="nav user-btn" onclick="toggleDropdown()">
+                                <svg id="userIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24">
+                                    <path d="M399 384.2C376.9 345.8 335.4 320 288 320l-64 0c-47.4 0-88.9 25.8-111 64.2
+                                             c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256
+                                             256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"/>
+                                </svg>
+                                <span id="userName">User</span> 
+                            </button>
+                            <div id="dropdownMenu" class="drpdwn_cont">
+                                <button class="close-btn" onclick="toggleDropdown()">X</button>
+                                <a href="#" onclick="logout()">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            
+
+            
+        <!-- </div> -->
+        <div class="navbar">
+           <div class="button">
+            <div class="drpdwn">
+                <button class="nav">Projects</button>
+                <div class="drpdwn_cont">
+                    <a href="g.html">Garbage</a>
+                    <a href="sewage.html">Sewage</a>
+                    <a href="stray.html">Stray Animals</a>
+                    <a href="street.html">Street Lights</a>
+                </div>
+            </div>
+            <!-- <a href="complain_form/comp.html" onclick="checkLogin()"><button class="nav">Complaint</button></a> -->
+            <a href="#" onclick="checkLogin(event)"><button class="nav">Complaint</button></a>
+
+            <script>
+               function checkLogin(event) {
+                        event.preventDefault();  // Stop default navigation
+
+                        const token = localStorage.getItem("token");
+                        if (!token) {
+                            alert("🚫 Please login first to access the Complaint Form!");
+                            window.location.href = "/home.html";
+                        } else {
+                            window.location.href = "complain_form/comp.html";
+                        }
+                    }
+
+            </script>
+
+            <!-- <a href="feedback/feed.html"><button class="nav">Feedback</button></a> -->
+            <button class="nav" onclick="checkFeedbackLogin(event)">Feedback</button>
+            <script>
+                function checkFeedbackLogin(event) {
+                    event.preventDefault(); // Stop default navigation
+                
+                    const token = localStorage.getItem("token");
+                    if (!token) {
+                        alert("🚫 Please log in first to give feedback!");
+                        window.location.href = "/home.html"; // Redirect to login page
+                    } else {
+                        window.location.href = "feedback/feed.html"; // Allow navigation to feedback page
+                    }
+                }
+                </script>
+                <button class="nav" onclick="scrollToSection('About')">About Us</button>
+                <button class="nav" onclick="scrollToSection('contact_us')">Contact Us</button>
+                <button class="nav" onclick="scrollToSection('important_links')">Important Links</button>
+                
+           </div>
+        </div>
+        <script>
+            function scrollToSection(sectionId) {
+                document.getElementById(sectionId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+            </script>
+
+    </header>
+    <!-- 🔹 Logout script include -->
+    <script src="login/logout.js"></script>
+    <script>
+        // ✅ Show Logout button only if user is logged in
+        document.addEventListener("DOMContentLoaded", function () {
+        const token = localStorage.getItem("token");
+        if (token) {
+            document.getElementById("logoutBtn").style.display = "block";
+        } else {
+            document.getElementById("login").style.display = "block";
+        }
+    });
+    </script>
+        <div class="slider-container">
+        <div class="owl-carousel owl-theme">
+            <div class="item"><img src="images/Tonk-district-of-Rajasthan.jpg" alt="Image 1" ></div>
+            <div class="item"><img src="images/jm tonk.jpg" alt="Image 2" height="500px"></div>
+            <div class="item"><img src="images/dist court.jpg" alt="Image 3" height="500px"></div>
+            <div class="item"><img src="images/sunehri-kothi-jaipur-jaipur-rajasthan-1-attr-hero.jpeg" alt="Image 4" height="500px"></div>
+        </div>
+            <button id="prev"><</button>
+            <button id="next">></button>
+        </div>    
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+        <script>
+        $(document).ready(function(){
+            $(".owl-carousel").owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: false,
+                dots: false,
+                autoplay: true, 
+                autoplayTimeout: 4000,
+                autoplayHoverPause: true, 
+                smartSpeed: 800,
+                items: 1 
+            });
+
+            $("#prev").click(function() {
+                $(".owl-carousel").trigger("prev.owl.carousel");
+            });
+
+            $("#next").click(function() {
+                $(".owl-carousel").trigger("next.owl.carousel");
+            });
+        });
+        </script>
+
+    <div id="line1">
+        <div class="population">
+                <div class="top">
+                     <div class="pop">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M72 88a56 56 0 1 1 112 0A56 56 0 1 1 72 88zM64 245.7C54 256.9 48 271.8 48 288s6 31.1 16 42.3l0-84.7zm144.4-49.3C178.7 222.7 160 261.2 160 304c0 34.3 12 65.8 32 90.5l0 21.5c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32l0-26.8C26.2 371.2 0 332.7 0 288c0-61.9 50.1-112 112-112l32 0c24 0 46.2 7.5 64.4 20.3zM448 416l0-21.5c20-24.7 32-56.2 32-90.5c0-42.8-18.7-81.3-48.4-107.7C449.8 183.5 472 176 496 176l32 0c61.9 0 112 50.1 112 112c0 44.7-26.2 83.2-64 101.2l0 26.8c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32zm8-328a56 56 0 1 1 112 0A56 56 0 1 1 456 88zM576 245.7l0 84.7c10-11.3 16-26.1 16-42.3s-6-31.1-16-42.3zM320 32a64 64 0 1 1 0 128 64 64 0 1 1 0-128zM240 304c0 16.2 6 31 16 42.3l0-84.7c-10 11.3-16 26.1-16 42.3zm144-42.3l0 84.7c10-11.3 16-26.1 16-42.3s-6-31.1-16-42.3zM448 304c0 44.7-26.2 83.2-64 101.2l0 42.8c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32l0-42.8c-37.8-18-64-56.5-64-101.2c0-61.9 50.1-112 112-112l32 0c61.9 0 112 50.1 112 112z"/></svg>
+                        </div>
+                            <p class="pp">Total Population<br>1,421,326</p>
+                    </div>
+                    <div class="pop">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M360 72a40 40 0 1 0 -80 0 40 40 0 1 0 80 0zM144 208a40 40 0 1 0 0-80 40 40 0 1 0 0 80zM32 416c-17.7 0-32 14.3-32 32s14.3 32 32 32l576 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 416zM496 208a40 40 0 1 0 0-80 40 40 0 1 0 0 80zM200 313.5l26.9 49.9c6.3 11.7 20.8 16 32.5 9.8s16-20.8 9.8-32.5l-36.3-67.5c1.7-1.7 3.2-3.6 4.3-5.8L264 217.5l0 54.5c0 17.7 14.3 32 32 32l48 0c17.7 0 32-14.3 32-32l0-54.5 26.9 49.9c1.2 2.2 2.6 4.1 4.3 5.8l-36.3 67.5c-6.3 11.7-1.9 26.2 9.8 32.5s26.2 1.9 32.5-9.8L440 313.5l0 38.5c0 17.7 14.3 32 32 32l48 0c17.7 0 32-14.3 32-32l0-38.5 26.9 49.9c6.3 11.7 20.8 16 32.5 9.8s16-20.8 9.8-32.5l-37.9-70.3c-15.3-28.5-45.1-46.3-77.5-46.3l-19.5 0c-16.3 0-31.9 4.5-45.4 12.6l-33.6-62.3c-15.3-28.5-45.1-46.3-77.5-46.3l-19.5 0c-32.4 0-62.1 17.8-77.5 46.3l-33.6 62.3c-13.5-8.1-29.1-12.6-45.4-12.6l-19.5 0c-32.4 0-62.1 17.8-77.5 46.3L18.9 340.6c-6.3 11.7-1.9 26.2 9.8 32.5s26.2 1.9 32.5-9.8L88 313.5 88 352c0 17.7 14.3 32 32 32l48 0c17.7 0 32-14.3 32-32l0-38.5z"/></svg>
+                        </div>
+                            <p class="pp">Average Population Density<br>510ppkm</p>
+                    </div>
+                    <div class="pop">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M160 96a96 96 0 1 1 192 0A96 96 0 1 1 160 96zm80 152l0 264-48.4-24.2c-20.9-10.4-43.5-17-66.8-19.3l-96-9.6C12.5 457.2 0 443.5 0 427L0 224c0-17.7 14.3-32 32-32l30.3 0c63.6 0 125.6 19.6 177.7 56zm32 264l0-264c52.1-36.4 114.1-56 177.7-56l30.3 0c17.7 0 32 14.3 32 32l0 203c0 16.4-12.5 30.2-28.8 31.8l-96 9.6c-23.2 2.3-45.9 8.9-66.8 19.3L272 512z"/></svg>
+                        </div>
+                            <p class="pp">literacy Rate<br>61.58%</p>
+                    </div>
+                </div>
+                <div class="top">
+                    <div class="pop">
+                        <div class="icon">
+                            <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M112 48a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm40 304l0 128c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-223.1L59.4 304.5c-9.1 15.1-28.8 20-43.9 10.9s-20-28.8-10.9-43.9l58.3-97c17.4-28.9 48.6-46.6 82.3-46.6l29.7 0c33.7 0 64.9 17.7 82.3 46.6l58.3 97c9.1 15.1 4.2 34.8-10.9 43.9s-34.8 4.2-43.9-10.9L232 256.9 232 480c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-128-16 0z"/></svg>
+                        </div>
+                            <p class="pp">Male Population<br>728,136</p>
+                    </div>
+                    <div class="pop">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M160 0a48 48 0 1 1 0 96 48 48 0 1 1 0-96zM88 384l-17.8 0c-10.9 0-18.6-10.7-15.2-21.1L93.3 248.1 59.4 304.5c-9.1 15.1-28.8 20-43.9 10.9s-20-28.8-10.9-43.9l53.6-89.2c20.3-33.7 56.7-54.3 96-54.3l11.6 0c39.3 0 75.7 20.6 96 54.3l53.6 89.2c9.1 15.1 4.2 34.8-10.9 43.9s-34.8 4.2-43.9-10.9l-33.9-56.3L265 362.9c3.5 10.4-4.3 21.1-15.2 21.1L232 384l0 96c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-96-16 0 0 96c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-96z"/></svg>
+                        </div>
+                            <p class="pp">Female Population<br>693,190</p>
+                    </div>
+                    <div class="pop">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg"enable-background="new 0 0 100 100" viewBox="0 0 100 100" ><circle cx="29.602" cy="14.229" r="9.229"></circle><path d="M39.078,25.973h-9.477l0,0h-9.477c-3.271,0-5.924,2.651-5.924,5.925V53.3c0,3.271,2.652,5.926,5.922,5.926h1.439v31.206c0,2.522,2.043,4.568,4.566,4.568h6.943c2.525,0,4.568-2.046,4.568-4.568V59.226h1.439c3.271,0,5.924-2.654,5.924-5.926V31.897C45.004,28.624,42.352,25.973,39.078,25.973z"></path><g><path d="M70.402 23.458c5.1 0 9.229-4.133 9.229-9.229C79.631 9.135 75.502 5 70.402 5c-5.096 0-9.227 4.135-9.227 9.229C61.176 19.325 65.307 23.458 70.402 23.458zM85.799 53.304V31.901c0-3.273-2.646-5.926-5.924-5.926H60.922c-3.27 0-5.92 2.652-5.92 5.926v21.402c0 2.274 1.281 4.245 3.16 5.237L55.424 71.93c0 2.382 1.932 4.311 4.313 4.311h2.625V90.43c0 2.523 2.045 4.57 4.566 4.57h6.943c2.523 0 4.568-2.047 4.568-4.57V76.24h2.633c2.383 0 4.309-1.929 4.309-4.311l-2.738-13.391C84.52 57.547 85.799 55.576 85.799 53.304z"></path></g></svg>
+                        </div>
+                        <p class="pp">Under 18 (Teens)<br>329,785</p>
+                    </div>
+                </div>
+        </div>
+        <div id="announcement">
+                <h1 id="Ann">Announcements</h1>
+            <div id="announcement_cont">
+                    <div class="announ">
+                        <h2 class="Ann_title">Announcement 1</h2>
+                        <p>We are excited to launch our new platform. Explore now!</p>
+                    </div>
+                    <div class="announ">
+                        <h2 class="Ann_title">Announcement 2</h2>
+                        <p class="Ann_cont">Maintenance scheduled for this weekend. Stay tuned for updates.</p>
+                    </div>
+                    <div class="announ">
+                        <h2 class="Ann_title">Announcement 3</h2>
+                        <p class="Ann_cont">New features added to the Projects section. Check them out!</p>
+                    </div>
+                    <div class="announ">
+                        <h2 class="Ann_title">Announcement 4</h2>
+                        <p class="Ann_cont">Upcoming webinar on community initiatives. Join us online!</p>
+                    </div>
+                    <div class="announ">
+                        <h2 class="Ann_title">Announcement 5</h2>
+                        <p class="Ann_cont">Upcoming webinar on community initiatives. Join us online!</p>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div id="About">
+        <h1 id="Ab_title">About Nagar Nigam</h1>
+        <div class="Ab_content">
+            <p>
+                Nagar Nigam, also known as the Municipal Corporation, is dedicated to improving the urban environment and delivering essential services to the community. Its primary focus lies in addressing the core needs of residents and ensuring sustainable urban development.
+            </p>
+        </div>
+    </div>
+    <div id="line2">
+        <div id="contact_us">
+            <h1 id="contact">Contact Us</h1>
+            <div id="contact_content">
+              <p>
+                Chairman <br>
+                Ph.No. 01432-246388 <br>
+              </p>
+              <p>
+                Commissioner <br>
+                Ph.No. 01432-247246 <br>
+               </p>
+               <p>
+                Toll Free Number <br>
+                Ph.No. 1064 <br>
+                WhatsApp No. 9413502834 
+               </p>
+            </div>
+        </div>
+        <div id="officials">
+            <div class="op">
+                    <img src="images/saumya.webp" alt="" height="130px" width="200px">
+               <p>
+                <strong>DC (District Collector, Tonk)</strong><br>
+                Name: Dr. Saumya Jha (IPS) <br>
+                Contact: 246377, 243025, 243026 <br>
+                Email: dm-ton-rj@nic.in
+               </p>
+            </div>
+            <div class="op">
+                    <img src="images/Tonk-SP-IPS-Vikas-Sangwan.webp" alt="" height="130px" width="200px" >
+               <p>
+                <strong>SP (Superintendent of Police, Tonk)</strong><br>
+                Name: Mr. Vikas Sangwan (IPS) <br>
+                Contact: 8764526201 <br>
+                Email: sp-ton-rj@nic.in <br>
+               </p>
+            </div>
+            <div class="op">
+                <img src="images/parshu.jpg" alt="" height="130px" width="200px" >
+                <p>
+                <strong>CEO (Chief Executive Officer, Tonk)</strong><br>
+                Name: Mr. Parshuram Dhanka <br>
+                Contact: 9414642761 <br>
+                Email: ceo.ton@rajasthan.gov.in
+                </p>
+            </div>
+            <div class="op">
+                <img src="images/RAM RATAN SONKARIA.jpg" alt="" height="130px" width="200px" >
+                <p>
+                <strong>ADM (Additional District Magistrate)</strong><br>
+                Name: Mr. Ram Ratan Sonkaria <br>
+                Contact: 246510, 246511, 9828550661 <br>
+                Email: admtonk@gmail.com
+                </p>
+            </div> 
+        </div>
+    </div>
+    <div id="important_links">
+        <h1>Important Links</h1>
+        <div id="link_list">
+            <div class="link">
+                <a href="http://www.india.gov.in/">
+                    <img src="images/indiaGov.gif" alt="">
+                </a>
+            </div>
+            <div class="link">
+                <a href="https://eprocure.gov.in/cppp/">
+                    <img src="images/procurement.png">
+                </a>
+            </div>
+            <div class="link">
+                <a href="https://pehchan.raj.nic.in/pehchan4/Mainpage.aspx">
+                    <img src="images/pahchan.png">
+                </a>
+            </div>
+            <div class="link">
+                <a href="https://sampark.rajasthan.gov.in/">
+                    <img src="images/sampark.png">
+                </a>
+            </div>
+            <div class="link">
+                <a href="https://www.digitalindiaportal.co.in/">
+                    <img src="images/digital india.jpg">
+                </a>
+            </div>
+            <div class="link">
+                <a href="https://pib.gov.in/PressReleasePage.aspx?PRID=1885837">
+                    <img src="images/pib.jpg">
+                </a>
+            </div>
+            <div class="link">
+                <a href="http://www.makeinindia.com/">
+                    <img src="images/makeinindia.jpg">
+                </a>
+            </div>
+            <div class="link">
+                <a href="https://swachhbharat.mygov.in/">
+                    <img src="images/swachbharat.jpg">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="chat">
+        <button id="chatbot">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="30" height="30">
+                <path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z" fill="grey"/></svg>
+                <p>Use Me!</p>
+            </button>
+        <div class="chat-container">
+              <h2>Nagar Nigam Complaint System</h2>
+            <div class="chat-box" id="chat-box">
+              <div class="chat-message bot-message">
+                Welcome to the Nagar Nigam Complaint System! Please describe your issue.
+              </div>
+            </div>
+            <div class="chat-input">
+              <input type="text" id="user-input" placeholder="Type your message...">
+              <button id="send-button">Send</button>
+            </div>
+          </div>
+    </div>
+    
+    <footer>
+        &copy; 2025 NAGAM. All Rights Reserved.
+    </footer>
+    
+    <!-- <script>
+        const slider = document.querySelector(".slider");
+        let index = 0;
+        const totalImages = document.querySelectorAll(".slider img").length;
+
+        document.getElementById("next").addEventListener("click", () => {
+            index = (index + 1) % totalImages;
+            slider.style.transform = `translateX(-${index * 100}%)`;
+        });
+
+        document.getElementById("prev").addEventListener("click", () => {
+            index = (index - 1 + totalImages) % totalImages;
+            slider.style.transform = `translateX(-${index * 100}%)`;
+        });
+        
+
+    </script> -->
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const token = localStorage.getItem("token");
+    const firstName = localStorage.getItem("firstName");
+
+    const loginSection = document.getElementById("loginSection"); 
+    const userSection = document.getElementById("userSection");
+    const userNameSpan = document.getElementById("userName");
+
+    if (token && firstName) {
+        // ✅ User is logged in: Show username, Hide Login Button
+        loginSection.style.display = "none";
+        userSection.style.display = "block";
+        userNameSpan.textContent = firstName;
+    } else {
+        // ✅ User is logged out: Show Login Button, Hide User Section
+        loginSection.style.display = "block";
+        userSection.style.display = "none";
+    }
+});
+
+// ✅ Logout Function with Confirmation
+function logout() {
+    const confirmLogout = confirm("Are you sure you want to log out?");
+
+    if (confirmLogout) {
+        localStorage.removeItem("token");   // Remove stored token
+        localStorage.removeItem("firstName"); // Remove stored first name
+        
+        // ✅ Ensure UI updates properly
+        document.getElementById("loginSection").style.display = "block"; // Show Login
+        document.getElementById("userSection").style.display = "none";  // Hide User Section
+        
+        window.location.reload(); // Refresh to apply changes
+    }
+}
+
+ // ✅ Toggle dropdown visibility (open/close)
+        function toggleDropdown() {
+            const dropdown = document.getElementById("dropdownMenu");
+            dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+    const firstName = localStorage.getItem("firstName");
+
+    if (firstName && firstName !== "undefined") {
+        document.getElementById("userName").textContent = firstName; // ✅ Show First Name
+        document.getElementById("userSection").style.display = "block"; // ✅ Show user section
+    } else {
+        document.getElementById("userName").textContent = "Guest"; // Fallback
+    }
+});
+
+
+            </script>
+    <script src="/complain_box/box.js"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+     
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            background-color: #fffaf0;
+            color: #333;
+        }
+        .container {
+            width: 70%;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #523A28;
+        }
+        .comment {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 12px;
+        }
+        .comment-left {
+            display: flex;
+            align-items: center;
+        }
+        .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: #f0f0f0;
+            color: black;
+        }
+        .comment-content {
+            flex-grow: 1;
+        }
+        .username {
+            font-weight: bold;
+            color: #0073e6;
+        }
+        .timestamp {
+            font-size: 0.8em;
+            color: #777;
+            margin-left: 10px;
+        }
+        .rating {
+            color: #f39c12;
+            white-space: nowrap;
+        }
+    </style>
+    
+    
+</head>
+<body>
+    <div class="container">
+        <h2>Feedback</h2>
+        <div id="feedbackContainer"></div> 
+    </div>
+    
+    
+
+
+    <script>
+document.addEventListener("DOMContentLoaded", async function () {
+    const feedbackContainer = document.getElementById("feedbackContainer");
+
+    function generateStars(rating) {
+        return "★".repeat(rating) + "☆".repeat(5 - rating);
+    }
+
+    // ✅ Fetch user ID properly
+    const Cl_Id = localStorage.getItem("userId"); // No hardcoding 🚀
+    if (!Cl_Id) {
+        alert("🚫 Please log in first!");
+        window.location.href = "/home.html";
+        return;
+    }
+
+    try {
+        // ✅ Fetch feedback data
+        const response = await fetch("http://localhost:8000/feedback");
+        const feedbackData = await response.json();
+
+        feedbackContainer.innerHTML = ""; // Clear old data
+
+        feedbackData.forEach(feedback => {
+            console.log("🔍 Feedback Data:", feedback); // Debugging Log
+
+            let username = feedback.name && feedback.name !== "Guest" ? feedback.name : "Anonymous";
+            let timestamp = feedback.submitted_at
+                ? new Date(feedback.submitted_at).toLocaleString()
+                : "No date available";
+
+            let commentHTML = `
+                <div class="comment">
+                    <div class="comment-left">
+                        <div class="avatar">&#128100;</div>
+                        <div class="comment-content">
+                            <span class="username">${username}</span>
+                            <span class="timestamp">${timestamp}</span>
+                            <p>${feedback.comment}</p>
+                        </div>
+                    </div>
+                    <span class="rating">${generateStars(feedback.rating)}</span>
+                </div>
+            `;
+            feedbackContainer.innerHTML += commentHTML;
+        });
+
+    } catch (error) {
+        console.error("❌ Error fetching feedback:", error);
+        feedbackContainer.innerHTML = `<p>Failed to load feedback.</p>`;
+    }
+});
+
+
+// ✅ Login check
+document.addEventListener("DOMContentLoaded", function () {
+    const userToken = localStorage.getItem("token");       // For users
+    const adminToken = localStorage.getItem("adminToken"); // For admins
+
+    if (!userToken && !adminToken) {
+        alert("🚫 Please log in first to access this page!");
+        window.location.href = "/home.html"; // Redirect to login page
+    }
+});
+
+    </script>
+ 
+    
+   
+
+</body>
+</html>
+
+
+

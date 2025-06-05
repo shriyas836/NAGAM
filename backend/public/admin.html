@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- <script src="auth.js"></script>  -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: floralwhite;
+            color: rgb(10, 10, 10);
+        }
+        h2 {
+            padding: 10px;
+            background-color: #523A28;
+            font-family: 'Times New Roman', Times, serif;
+            text-align: center;
+            color: white;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 50px;
+        }
+        .icon {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #A39D92;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        .icon:hover {
+            transform: scale(1.1);
+            background-color: #817670;
+        }
+
+        #heading{
+            height: 75px;
+            width: 100%;
+            font-size: 2.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #8E7161;
+
+        }
+
+        #title{
+            margin: 0;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin-right: 50%;
+            color: white;
+
+        }
+
+        #logo{
+            height: 4rem;
+            margin-left: 10px;
+            margin-right: 10px;
+
+        }
+
+        #Logout{
+            height: 60%;
+            width: 150px;
+            color: white;
+            background-color: #8E7161;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.5rem;
+            border: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            
+        }    
+
+        a{
+            text-decoration: none;
+        }
+
+        #Logout:hover {
+            border: 2px solid white;
+
+        }
+
+        #user{
+            height: 70%;
+            margin-right: 10px;
+            fill: white;
+
+        }
+
+        #important_links{
+            margin: 20px;
+            background: #ffffff;
+            padding: 30px;
+            box-shadow: 5px 5px 10px gray;
+            border-radius: 10px;
+        }
+
+        #important_links h1{
+            margin: 0;
+            background-color: #523A28;
+            color: white;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+       
+        #link_list{
+            height: 200px;
+            display: flex;
+            justify-content:flex-start;
+            align-items: center;
+            padding: 20px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            gap: 20px;
+            white-space: nowrap;
+        }
+
+        .link{
+            height: 130px;
+            box-shadow: 5px 5px 10px gray;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+    </style>
+     
+</head>
+<body>
+    <div id="heading">
+        <img src="images/logo copy.png" id="logo" alt="">
+        <p id="title">Nagar Nigam, Tonk</p>
+        <button id="Logout" onclick="logoutAdmin()">
+            <svg id="user" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24">
+                <path d="M399 384.2C376.9 345.8 335.4 320 288 320l-64 0c-47.4 0-88.9 25.8-111 64.2
+                         c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256
+                         256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"/>
+            </svg>
+            Logout</button>
+    </div>
+   
+    <h2>Admin Dashboard</h2><br>
+<div class="container">
+    <a href="a.html" class="icon">Employee Registration</a>
+    <a href="complaints.html" class="icon" onclick="checkAdminLogin(event)">User Complaints</a>
+    <a href="feedback.html" class="icon" onclick="checkAdminLogin(event)">User Feedback</a>
+</div>
+        <script>
+        document.addEventListener("DOMContentLoaded", checkAdminAccess);
+
+async function checkAdminAccess() {
+    const token = localStorage.getItem("token"); // Get JWT token
+
+    if (!token) {
+        redirectToLogin();
+        return;
+    }
+
+    try {
+        const response = await fetch("http://localhost:8000/admin/verify-admin", {
+            method: "GET",
+            headers: { "Authorization": `Bearer ${token}` },
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.isAdmin) {
+            logoutAndRedirect();
+        }
+    } catch (error) {
+        console.error("❌ Error verifying admin access:", error);
+        logoutAndRedirect();
+    }
+}
+
+// ✅ Function to Redirect Unauthorized Users
+function redirectToLogin() {
+    alert("Unauthorized access! Redirecting to login...");
+    window.location.href = "home.html";
+}
+
+    // ✅ Prevent back navigation after logout
+    window.history.pushState(null, null, window.location.href);
+    window.addEventListener("popstate", function () {
+        window.history.pushState(null, null, window.location.href);
+    });
+
+
+</script>
+
+
+        <div id="important_links">
+            <h1>Important Links</h1>
+            <div id="link_list">
+                <div class="link">
+                    <a href="https://www.india.gov.in/">
+                        <img src="images/indiaGov.gif" alt="">
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="https://eprocure.gov.in/cppp/">
+                        <img src="images/procurement.png">
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="https://pehchan.raj.nic.in/pehchan4/Mainpage.aspx">
+                        <img src="images/pahchan.png">
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="https://sampark.rajasthan.gov.in/">
+                        <img src="images/sampark.png">
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="https://www.digitalindiaportal.co.in/">
+                        <img src="images/digital india.jpg">
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="https://pib.gov.in/PressReleasePage.aspx?PRID=1885837">
+                        <img src="images/pib.jpg">
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="http://www.makeinindia.com/">
+                        <img src="images/makeinindia.jpg">
+                    </a>
+                </div>
+                <div class="link">
+                    <a href="https://swachhbharat.mygov.in/">
+                        <img src="imagesswachbharat.jpg">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+<script>
+//     function logoutAdmin() {
+//     // ✅ Remove token & userType from localStorage
+//     localStorage.removeItem("token");
+//     localStorage.removeItem("userType");
+//     localStorage.removeItem("username"); // Ensure username is also removed
+
+//     // ✅ Redirect to Home/Login Page
+//     window.location.href = "home.html";
+
+//     // ✅ Prevent Back Button (Clear History)
+//     setTimeout(() => {
+//         window.history.pushState(null, null, "home.html");
+//         window.history.replaceState(null, null, "home.html");
+//     }, 1);
+// }
+// ✅ Logout Function with Confirmation
+function logoutAdmin() {
+            // Confirm Logout
+            const confirmLogout = confirm("Are you sure you want to log out?");
+
+            if (confirmLogout) {
+                // ✅ Remove token & userType from localStorage
+                localStorage.removeItem("token");
+                localStorage.removeItem("userType");
+                localStorage.removeItem("username"); // Ensure username is also removed
+
+                // ✅ Redirect to Home/Login Page
+                window.location.href = "home.html";
+
+                // ✅ Prevent Back Button (Clear History)
+                setTimeout(() => {
+                    window.history.pushState(null, null, "home.html");
+                    window.history.replaceState(null, null, "home.html");
+                }, 1);
+            }
+        }
+
+</script>
+
+        
+    
+        
+        
+
+</body>
+</html>
+        
+    
+        
+        
+
+</body>
+</html> 
